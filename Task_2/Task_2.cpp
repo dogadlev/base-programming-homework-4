@@ -21,12 +21,14 @@ public:
         this->building = building;
         this->appartment = appartment;
     }
-
     Address() {}
-
     std::string outputAddress()
     {
         return city + ", " + street + ", " + building + ", " + appartment;
+    }
+    std::string getCity() 
+    {
+        return city;
     }
 };
 
@@ -34,7 +36,6 @@ int getAddressCount(std::ifstream& dataFile)
 {
     int addressCount = 0;
     dataFile >> addressCount;
-
     return addressCount;
 }
 
@@ -72,7 +73,7 @@ void sortArray(Address* addressArr, int addressCount)
         sort = false;
         for (int i = addressCount - 1; i > 0; i--)
         {
-            if (addressArr[i - 1].outputAddress() > addressArr[i].outputAddress())
+            if (addressArr[i - 1].getCity() > addressArr[i].getCity())
             {
                 tmp = addressArr[i - 1];
                 addressArr[i - 1] = addressArr[i];
@@ -90,6 +91,7 @@ int main(int argc, char** argv)
     if (!dataFile.is_open())
     {
         std::cout << "Could not open the file in.txt. Check the file name.";
+        return 1;
     }
     else
     {
@@ -102,7 +104,6 @@ int main(int argc, char** argv)
         outputAddress(outFile, addressCount, addressArr);
         outFile.close();
         delete[] addressArr;
+        return 0;
     }
-
-    return 0;
 }

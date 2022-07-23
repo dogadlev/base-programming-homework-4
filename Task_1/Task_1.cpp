@@ -69,6 +69,7 @@ int main(int argc, char** argv)
     if (!dataFile.is_open()) 
     {
         std::cout << "Could not open the file in.txt. Check the file name.";
+        return 1;
     }
     else
     {
@@ -80,7 +81,6 @@ int main(int argc, char** argv)
         outputAddress(outFile, addressCount, addressArr);
         outFile.close();
         delete[] addressArr;
+        return 0;
     }
-
-    return 0;
 }
